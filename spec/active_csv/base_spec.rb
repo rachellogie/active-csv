@@ -1,6 +1,7 @@
 require 'rspec'
 require 'active_csv/base'
 require 'csv'
+require_relative '../../lib/normalizer'
 
 describe ActiveCSV::Base do
 
@@ -45,6 +46,14 @@ describe ActiveCSV::Base do
       actual = active_csv.respond_to?(:name)
 
       expect(actual).to eq true
+    end
+
+    it "dynamically generates headers into standard ruby names" do
+      instance = Normalizer.new(CSV::Row.new(["FIrst   NAme  "], ["Joe"]))
+
+      actual = instance.first_name
+
+      expect(actual).to eq "Joe"
     end
   end
 
