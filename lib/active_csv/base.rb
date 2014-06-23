@@ -11,7 +11,7 @@ module ActiveCSV
       if @row.include? method_name.to_s
         @row.field(method_name.to_s)
       else
-        super
+        raise "No column called #{method_name}"
       end
     end
 

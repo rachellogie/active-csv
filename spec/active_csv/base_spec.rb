@@ -55,6 +55,14 @@ describe ActiveCSV::Base do
 
       expect(actual).to eq "Joe"
     end
+
+    it "raise an error if the csv row doesn't have that column" do
+      instance = Normalizer.new(CSV::Row.new(["first_name"], ["Joe"]))
+
+      expect{instance.address}.to raise_error("No column called address")
+
+      expect(instance.respond_to?(:address)).to eq false
+    end
   end
 
 
