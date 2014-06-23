@@ -32,7 +32,22 @@ describe ActiveCSV::Base do
 
       expect(actual).to eq false
     end
+
+    it "returns nil if the field name is nil" do
+      row = CSV::Row.new(["name", "age"], [nil, "24"])
+
+      active_csv = ActiveCSV::Base.new(row)
+
+      actual = active_csv.name
+
+      expect(actual).to eq nil
+
+      actual = active_csv.respond_to?(:name)
+
+      expect(actual).to eq true
+    end
   end
+
 
 
 
